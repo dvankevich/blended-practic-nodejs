@@ -3,11 +3,12 @@ import {
   getProductsByIdController,
   getProductsController,
 } from '../controllers/products.js';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 const router = Router();
 
-router.get('/products', getProductsController);
+router.get('/products', ctrlWrapper(getProductsController));
 
-router.get('/products/:id', getProductsByIdController);
+router.get('/products/:id', ctrlWrapper(getProductsByIdController));
 
 export default router;
