@@ -5,8 +5,23 @@ import { SORT_ORDER } from '../constants/constants.js';
 export const getAllProducts = async ({
   sortBy = '_id',
   sortOrder = SORT_ORDER.ASC,
+  filter = {},
 }) => {
-  const products = await ProductModel.find().sort({ [sortBy]: sortOrder });
+  const productQuery = ProductModel.find();
+  // console.log('productQuery: ', productQuery);
+
+  if (filter.category) {
+    productQuery.where('category').equals(filter.category);
+  }
+
+  if (filter.minPrice) {
+    productQuery.where('price').gte(filter.minPrice);
+  }
+  if (filter.maxPrice) {
+    productQuery.where('price').lte(filter.maxPrice);
+  }
+
+  const products = await productQuery.sort({ [sortBy]: sortOrder });
   return products;
 };
 

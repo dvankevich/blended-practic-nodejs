@@ -8,15 +8,19 @@ import {
 } from '../services/products.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 
+import { parseFilterParams } from '../utils/parseFilterParams.js';
+
 export const getProductsController = async (req, res) => {
   console.log(req.query);
 
   const { sortBy, sortOrder } = parseSortParams(req.query);
-  console.log({ sortBy, sortOrder });
+  const filter = parseFilterParams(req.query);
+  console.log('filter: ', filter);
 
   const products = await getAllProducts({
     sortBy,
     sortOrder,
+    filter,
   });
 
   res.status(200).json({
