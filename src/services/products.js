@@ -6,3 +6,8 @@ export const getAllProducts = async () => {
 };
 
 export const getProductsById = async (id) => await ProductModel.findById(id);
+
+export const createProduct = async (payload) => {
+  const product = await ProductModel.create(payload);
+  return product;
+};
