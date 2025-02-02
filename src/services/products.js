@@ -1,8 +1,12 @@
 import createHttpError from 'http-errors';
 import { ProductModel } from '../db/models/products.js';
+import { SORT_ORDER } from '../constants/constants.js';
 
-export const getAllProducts = async () => {
-  const products = await ProductModel.find();
+export const getAllProducts = async ({
+  sortBy = '_id',
+  sortOrder = SORT_ORDER.ASC,
+}) => {
+  const products = await ProductModel.find().sort({ [sortBy]: sortOrder });
   return products;
 };
 
