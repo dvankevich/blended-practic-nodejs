@@ -6,9 +6,18 @@ import {
   getProductsById,
   updateProduct,
 } from '../services/products.js';
+import { parseSortParams } from '../utils/parseSortParams.js';
 
 export const getProductsController = async (req, res) => {
-  const products = await getAllProducts();
+  console.log(req.query);
+
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+  console.log({ sortBy, sortOrder });
+
+  const products = await getAllProducts({
+    sortBy,
+    sortOrder,
+  });
 
   res.status(200).json({
     status: 200,
