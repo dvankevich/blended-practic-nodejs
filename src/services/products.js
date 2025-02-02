@@ -1,3 +1,4 @@
+import createHttpError from 'http-errors';
 import { ProductModel } from '../db/models/products.js';
 
 export const getAllProducts = async () => {
@@ -25,4 +26,8 @@ export const updateProduct = async (id, payload, options = {}) => {
     product: rawResult.value,
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
+};
+
+export const deleteProduct = async (_id) => {
+  return await ProductModel.findOneAndDelete({ _id });
 };
