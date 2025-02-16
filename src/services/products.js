@@ -6,8 +6,9 @@ export const getAllProducts = async ({
   sortBy = '_id',
   sortOrder = SORT_ORDER.ASC,
   filter = {},
+  userId,
 }) => {
-  const productQuery = ProductModel.find();
+  const productQuery = ProductModel.find({ userId });
   // console.log('productQuery: ', productQuery);
 
   if (filter.category) {
@@ -25,15 +26,16 @@ export const getAllProducts = async ({
   return products;
 };
 
-export const getProductsById = async (id) => await ProductModel.findById(id);
+export const getProductsById = async (filter) =>
+  await ProductModel.findOne(filter);
 
 export const createProduct = async (payload) => {
   const product = await ProductModel.create(payload);
   return product;
 };
 
-export const updateProduct = async (id, payload, options = {}) => {
-  const rawResult = await ProductModel.findOneAndUpdate({ _id: id }, payload, {
+export const updateProduct = async (filter, payload, options = {}) => {
+  const rawResult = await ProductModel.findOneAndUpdate(filter, payload, {
     new: true,
     includeResultMetadata: true,
     ...options,
@@ -47,6 +49,6 @@ export const updateProduct = async (id, payload, options = {}) => {
   };
 };
 
-export const deleteProduct = async (_id) => {
-  return await ProductModel.findOneAndDelete({ _id });
+export const deleteProduct = async (filter) => {
+  return await ProductModel.findOneAndDelete(filter);
 };

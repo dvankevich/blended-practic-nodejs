@@ -21,6 +21,7 @@ export const getProductsController = async (req, res) => {
     sortBy,
     sortOrder,
     filter,
+    userId: req.user._id,
   });
 
   res.status(200).json({
@@ -31,9 +32,10 @@ export const getProductsController = async (req, res) => {
 };
 
 export const getProductsByIdController = async (req, res, next) => {
-  const { id } = req.params;
+  const { id: _id } = req.params;
+  const userId = req.user._id;
 
-  const data = await getProductsById(id);
+  const data = await getProductsById({ _id, userId });
 
   if (!data) {
     throw createHttpError(404, 'Product not found');
@@ -41,13 +43,16 @@ export const getProductsByIdController = async (req, res, next) => {
 
   res.status(200).json({
     status: 200,
-    message: `Successfully found product with id ${id}!`,
+    message: `Successfully found product with id ${_id}!`,
     data: data,
   });
 };
 
 export const createProductController = async (req, res) => {
-  const product = await createProduct(req.body);
+  console.log(req.user);
+
+  const product = await createProduct({ ...req.body, userId: req.user._id });
+
   res.status(201).json({
     status: 201,
     message: `Successfully created a product!`,
@@ -56,8 +61,10 @@ export const createProductController = async (req, res) => {
 };
 
 export const patchProductController = async (req, res, next) => {
-  const { id } = req.params;
-  const result = await updateProduct(id, req.body);
+  const { id: _id } = req.params;
+  const userId = req.user._id;
+
+  const result = await updateProduct({ _id, userId }, req.body);
 
   if (!result) {
     throw createHttpError(404, 'Product not found');
@@ -71,8 +78,10 @@ export const patchProductController = async (req, res, next) => {
 };
 
 export const deleteProductController = async (req, res) => {
-  const { id } = req.params;
-  const result = await deleteProduct(id);
+  const { id: _id } = req.params;
+  const userId = req.user._id;
+
+  const result = await deleteProduct({ _id, userId });
   if (!result) {
     throw createHttpError(404, 'Product not found');
   }
