@@ -1,0 +1,52 @@
+tags:
+  - Products
+summary: create product
+operationId: postProduct
+description: 'Get list of products with this endpoint'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            example: Book name
+          price:
+            type: number
+            example: 19.99
+          category:
+            type: string
+            example: "sci fi"
+          description:
+            type: string
+            example: "book description"
+responses:
+  '201':
+    description: 'create product'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a product!
+            data:
+              type: object
+              $ref: '../components/schemas/product.yaml'
+  '401':
+    $ref: '../components/responses/401.yaml'
+  '404':
+    $ref: '../components/responses/404.yaml'
+  '500':
+    $ref: '../components/responses/500.yaml'
