@@ -8,8 +8,8 @@ info:
   description: >
     Awesome products list
 tags:
-  - name: products
-    description: pruducts API
+  - name: Products
+    description: products API
 servers:
   - url: http://localhost:3000
 paths:
@@ -23,6 +23,8 @@ paths:
       $ref: ../swagger/paths/{id}/get.yaml
     patch:
       $ref: ../swagger/paths/{id}/patch.yaml
+    delete:
+      $ref: ../swagger/paths/{id}/delete.yaml
 components:
   securitySchemes:
     bearerAuth:

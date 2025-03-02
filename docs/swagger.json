@@ -16,8 +16,8 @@
   ],
   "tags": [
     {
-      "name": "products",
-      "description": "pruducts API"
+      "name": "Products",
+      "description": "products API"
     }
   ],
   "paths": {
@@ -155,6 +155,12 @@
                   },
                   "category": {
                     "type": "string",
+                    "enum": [
+                      "books",
+                      "electronics",
+                      "clothing",
+                      "other"
+                    ],
                     "example": "sci fi"
                   },
                   "description": {
@@ -261,6 +267,141 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Update product",
+        "operationId": "patchProduct",
+        "description": "Update product with this endpoint",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Book name"
+                  },
+                  "price": {
+                    "type": "number",
+                    "example": 19.99
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "books",
+                      "electronics",
+                      "clothing",
+                      "other"
+                    ],
+                    "example": "sci fi"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "book description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "update product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully updated a product!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/product"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Delete product by id",
+        "operationId": "deleteProduct",
+        "description": "Delete product by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete product by id"
           },
           "401": {
             "$ref": "#/components/responses/401"
