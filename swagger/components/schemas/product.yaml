@@ -1,0 +1,45 @@
+# swagger/components/schemas/student.yaml
+
+type: object
+required:
+  - _id
+  - name
+  - price
+  - category
+  - userId
+  - createdAt
+  - updatedAt
+properties:
+  _id:
+    description: "Product's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  name:
+    description: "Product's name"
+    type: string
+    example: 'Laptop'
+  price:
+    description: "Product's price"
+    type: number
+    example: 1200
+  category:
+    description: "Product's category"
+    type: string
+    enum: ['books', 'electronics', 'clothing', 'other']
+  description:
+    description: "Description of a product"
+    type: string
+    example: Some description of a product
+  userId:
+    description: "Product's user id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  createdAt:
+    description: "Data of created"
+    type: string
+    example: 2025-03-02T07:15:48.525+00:00
+  updatedAt:
+    description: "Data of updated"
+    type: string
+    example: 2025-03-02T07:15:48.525+00:00
+
