@@ -27,7 +27,7 @@ export const getAllProducts = async ({
 };
 
 export const getProductsById = async (filter) =>
-  await ProductModel.findOne(filter);
+  await ProductModel.findOn(filter);
 
 export const createProduct = async (payload) => {
   const product = await ProductModel.create(payload);
