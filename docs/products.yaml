@@ -1,0 +1,522 @@
+openapi: 3.0.3
+info:
+  title: Products
+  description: |-
+    # 🚀 Products API
+
+    This template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.
+  version: 1.0.0
+  contact: {}
+servers:
+- url: http://localhost:3000
+paths:
+  /products/{id}:
+    get:
+      tags:
+      - products
+      summary: get product by id
+      description: |-
+        This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+        A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+      operationId: getProductById
+      responses:
+        '200':
+          description: get by id
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '328'
+            Date:
+              schema:
+                type: string
+                example: Sun, 02 Mar 2025 09:02:49 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"148-SnWnbnH3ivIJ3wmz3uBjrm1F00Y"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: 67c40576a08ff1d3baa9e055
+                      category:
+                        type: string
+                        example: books
+                      createdAt:
+                        type: string
+                        example: 2025-03-02T07:15:02.976Z
+                      description:
+                        type: string
+                        example: Great book
+                      name:
+                        type: string
+                        example: New product22222
+                      price:
+                        type: number
+                        example: 99.9
+                      updatedAt:
+                        type: string
+                        example: 2025-03-02T07:15:02.976Z
+                      userId:
+                        type: string
+                        example: 67b1ac5f0942da4ad17d1ff2
+                  message:
+                    type: string
+                    example: Successfully found product with id 67c40576a08ff1d3baa9e055!
+                  status:
+                    type: number
+                    example: 200
+              examples:
+                get by id:
+                  value:
+                    data:
+                      _id: 67c40576a08ff1d3baa9e055
+                      category: books
+                      createdAt: 2025-03-02T07:15:02.976Z
+                      description: Great book
+                      name: New product22222
+                      price: 99.9
+                      updatedAt: 2025-03-02T07:15:02.976Z
+                      userId: 67b1ac5f0942da4ad17d1ff2
+                    message: Successfully found product with id 67c40576a08ff1d3baa9e055!
+                    status: 200
+        '400':
+          description: get by id
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '79'
+            Date:
+              schema:
+                type: string
+                example: Sun, 02 Mar 2025 09:36:03 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"4f-HU7cOEUckjnXYr99trQX5zqFRwE"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Id is not valid
+                  message:
+                    type: string
+                    example: BadRequestError
+                  status:
+                    type: number
+                    example: 400
+              examples:
+                get by id:
+                  value:
+                    data:
+                      message: Id is not valid
+                    message: BadRequestError
+                    status: 400
+        '404':
+          description: get by id
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '79'
+            Date:
+              schema:
+                type: string
+                example: Sun, 02 Mar 2025 09:36:23 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"4f-7mSgnqcTRAYkF8R7/hOotSH75Nw"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Product not found
+                  message:
+                    type: string
+                    example: NotFoundError
+                  status:
+                    type: number
+                    example: 404
+              examples:
+                get by id:
+                  value:
+                    data:
+                      message: Product not found
+                    message: NotFoundError
+                    status: 404
+    patch:
+      tags:
+      - products
+      summary: update product by id
+      description: update product by id
+      operationId: updateProductById
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price:
+                  type: string
+                  example: '999.99'
+            examples:
+              update product by id:
+                value:
+                  price: '999.99'
+      responses:
+        '200':
+          description: ''
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        example: 67c40576a08ff1d3baa9e055
+  /info:
+    post:
+      tags:
+      - products
+      summary: create product
+      description: |-
+        This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+        A successful POST request typically returns a `200 OK` or `201 Created` response code.
+      operationId: createProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Add your name in the body
+            examples:
+              create product:
+                value:
+                  name: Add your name in the body
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+      - products
+      summary: product by id
+      description: |-
+        This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+
+        A successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code.
+      operationId: productById
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+          example: '1'
+      responses:
+        '200':
+          description: ''
+  /products:
+    get:
+      tags:
+      - products
+      summary: get products
+      description: |-
+        This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+        A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+      operationId: getProducts
+      parameters:
+      - name: category
+        in: query
+        schema:
+          type: string
+          example: books
+      - name: minPrice
+        in: query
+        schema:
+          type: string
+          example: '0'
+      - name: maxPrice
+        in: query
+        schema:
+          type: string
+          example: '200'
+      responses:
+        '200':
+          description: Get data
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '528'
+            Date:
+              schema:
+                type: string
+                example: Sun, 02 Mar 2025 08:34:37 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"210-Ipg+K+L/61Y8mF5ZYnWGJzutrJ0"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          example: 67c40576a08ff1d3baa9e055
+                        category:
+                          type: string
+                          example: books
+                        createdAt:
+                          type: string
+                          example: 2025-03-02T07:15:02.976Z
+                        description:
+                          type: string
+                          example: Great book
+                        name:
+                          type: string
+                          example: New product22222
+                        price:
+                          type: number
+                          example: 99.9
+                        updatedAt:
+                          type: string
+                          example: 2025-03-02T07:15:02.976Z
+                        userId:
+                          type: string
+                          example: 67b1ac5f0942da4ad17d1ff2
+                    example:
+                    - _id: 67c40576a08ff1d3baa9e055
+                      category: books
+                      createdAt: 2025-03-02T07:15:02.976Z
+                      description: Great book
+                      name: New product22222
+                      price: 99.9
+                      updatedAt: 2025-03-02T07:15:02.976Z
+                      userId: 67b1ac5f0942da4ad17d1ff2
+                    - _id: 67c405a4a08ff1d3baa9e059
+                      category: books
+                      createdAt: 2025-03-02T07:15:48.525Z
+                      description: agile methodology
+                      name: Agile
+                      price: 19.9
+                      updatedAt: 2025-03-02T07:15:48.525Z
+                      userId: 67b1ac5f0942da4ad17d1ff2
+                  message:
+                    type: string
+                    example: Successfully found products!
+                  status:
+                    type: number
+                    example: 200
+              examples:
+                Get data:
+                  value:
+                    data:
+                    - _id: 67c40576a08ff1d3baa9e055
+                      category: books
+                      createdAt: 2025-03-02T07:15:02.976Z
+                      description: Great book
+                      name: New product22222
+                      price: 99.9
+                      updatedAt: 2025-03-02T07:15:02.976Z
+                      userId: 67b1ac5f0942da4ad17d1ff2
+                    - _id: 67c405a4a08ff1d3baa9e059
+                      category: books
+                      createdAt: 2025-03-02T07:15:48.525Z
+                      description: agile methodology
+                      name: Agile
+                      price: 19.9
+                      updatedAt: 2025-03-02T07:15:48.525Z
+                      userId: 67b1ac5f0942da4ad17d1ff2
+                    message: Successfully found products!
+                    status: 200
+      security:
+      - bearerAuth: []
+  /users/refresh:
+    post:
+      tags:
+      - users
+      summary: refresh
+      description: refresh
+      operationId: refresh
+      responses:
+        '200':
+          description: ''
+  /users/logout:
+    post:
+      tags:
+      - users
+      summary: logout
+      description: logout
+      operationId: logout
+      responses:
+        '200':
+          description: ''
+      security:
+      - bearerAuth: []
+  /users/register:
+    post:
+      tags:
+      - users
+      summary: register
+      description: |-
+        This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+        A successful POST request typically returns a `200 OK` or `201 Created` response code.
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: abra@bored.com
+                name:
+                  type: string
+                  example: MyName
+                password:
+                  type: string
+                  example: Pa$$w0rd
+            examples:
+              register:
+                value:
+                  email: abra@bored.com
+                  name: MyName
+                  password: Pa$$w0rd
+      responses:
+        '200':
+          description: ''
+  /users/login:
+    post:
+      tags:
+      - users
+      summary: login
+      description: login
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: abra5@bored.com
+                password:
+                  type: string
+                  example: Pa$$w0rd
+            examples:
+              login:
+                value:
+                  email: abra5@bored.com
+                  password: Pa$$w0rd
+      responses:
+        '200':
+          description: ''
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+- bearerAuth: []
+tags:
+- name: products
+- name: users
+
