@@ -1,0 +1,32 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Products list
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: >
+    Awesome products list
+tags:
+  - name: Products
+    description: products API
+servers:
+  - url: http://localhost:3000
+paths:
+  /products:
+    get:
+      $ref: ../swagger/paths/get.yaml
+    post:
+      $ref: ../swagger/paths/post.yaml
+  /products/{id}:
+    get:
+      $ref: ../swagger/paths/{id}/get.yaml
+    patch:
+      $ref: ../swagger/paths/{id}/patch.yaml
+    delete:
+      $ref: ../swagger/paths/{id}/delete.yaml
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
